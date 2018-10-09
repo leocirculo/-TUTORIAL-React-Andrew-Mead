@@ -1,0 +1,28 @@
+.navbar{
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 1em;
+}
+
+.navbar-logo{
+  font-weight: bold;
+}
+
+.navbar-links ul{
+  display: flex;
+  align-items: center;
+}
+
+.navbar-links li {
+  padding: 0 1em;
+}
+
+.navbar-links a {
+  color: teal;
+  text-decoration: none;
+}
+
+.navbar-owner{
+  margin-left: auto;
+}

@@ -11,6 +11,7 @@ module.exports = {
       Greeter: 'public/components/Greeter.jsx',
       GreeterMsg: 'public/components/GreeterMsg.jsx',
       GreeterForm: 'public/components/GreeterForm.jsx',
+      OpenWeatherMap: 'public/api/openWeatherMap.jsx',
     },
     extensions: ['.js', '.jsx'],
   },
@@ -24,6 +25,14 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
       },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }
     ],
+  },
+  devtool: 'eval-source-map',
+  performance: {
+    hints: false,
   },
 };

@@ -1,0 +1,12 @@
+.home{
+  text-align: center;
+}
+
+.home .page-body{
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.home .form-message {
+  padding: 2em; 
+}

@@ -1,0 +1,21 @@
+.form-group{
+  margin-bottom: 1em;
+}
+
+.form-control{
+  display: block;
+  border: 1px solid #999999;
+  color: #999999;
+  width: 100%;
+  padding: .5em;
+}
+
+.form-submit {
+  background-color: transparent;
+  color: teal;
+  border: 1px solid teal;
+  padding: .5em 1em;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
