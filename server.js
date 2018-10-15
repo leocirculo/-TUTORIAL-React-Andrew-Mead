@@ -5,11 +5,6 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use((req, res, next) => {
-  if (req.headers['x-forwarded-proto'] === 'http') return next();
-  res.redirect('http://' + req.hostname + req.url);
-})
-
 // Server folder
 app.use(express.static('public'));
 
