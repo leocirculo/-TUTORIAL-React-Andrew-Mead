@@ -3,6 +3,12 @@ const path = require('path');
 
 // Create app
 const app = express();
+const port = process.env.PORT || 3000;
+
+app.use((req, res, next) => {
+  if (req.headers['x-forwarded-proto'] === 'http') return next();
+  res.redirect('http://' + req.hostname + req.url);
+})
 
 // Server folder
 app.use(express.static('public'));
@@ -15,6 +21,6 @@ app.get('/*', function (req, res) {
   })
 });
 
-app.listen(3000, () => {
-  console.log('App running on port 3000');
+app.listen(port, () => {
+  console.log('App running on port ' + port);
 });
