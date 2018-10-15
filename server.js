@@ -1,9 +1,9 @@
-const express = require('express');
-const path = require('path');
+var express = require('express');
+var path = require('path');
 
 // Create app
-const app = express();
-const port = process.env.PORT || 3000;
+var app = express();
+var port = process.env.PORT || 5000;
 
 // Server folder
 app.use(express.static('public'));
