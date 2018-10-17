@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Nav from './components/Nav';
 import Home from './views/Home';
 import About from './views/About';
-import './styles/main.css';
+
+import 'foundation-sites/dist/css/foundation.min.css';
 
 ReactDOM.render(
   <Router>
