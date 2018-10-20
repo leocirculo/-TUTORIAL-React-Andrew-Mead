@@ -15,7 +15,7 @@ const Main = () => {
             <Link to="/?location=Berlin">Berlin, Germany</Link>
           </li>
           <li>
-            <Link to="/location=Resistencia">Resistencia, Chaco</Link>
+            <Link to="/?location=Resistencia">Resistencia, Chaco</Link>
           </li>
         </ol>
       </Layout>

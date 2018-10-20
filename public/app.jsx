@@ -5,11 +5,12 @@ import Nav from './components/Nav';
 import Home from './views/Home';
 import Examples from './views/Examples';
 
-import 'foundation-sites/dist/css/foundation.min.css';
+import 'foundation-sites/dist/css/foundation-prototype.min.css';
+import './styles/app.scss';
 
 ReactDOM.render(
   <Router>
-    <div>
+    <div className="my-app">
       <Nav />
       <Route exact path="/" component={Home} />
       <Route exact path="/examples" component={Examples} />

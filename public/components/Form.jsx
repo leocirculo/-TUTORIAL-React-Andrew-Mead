@@ -1,5 +1,4 @@
 import React from 'react';
-import './../styles/form.css';
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -30,7 +29,7 @@ export default class Form extends React.Component {
           />
         </div>
         <footer className="form-footer">
-          <button className="form-submit">Get Weather</button>
+          <button className="button hollow expanded">Get Weather</button>
         </footer>
       </form>
     )
