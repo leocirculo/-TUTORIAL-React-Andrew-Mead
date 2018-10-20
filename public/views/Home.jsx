@@ -1,39 +1,47 @@
 import React from 'react';
-import './../styles/home.css';
+import queryString from 'query-string';
+import OpenWeatherMap from './../api/openWeatherMap';
 import Form from './../components/Form';
 import FormMsg from './../components/FormMsg';
-import OpenWeatherMap from 'OpenWeatherMap';
+import Layout from './../components/Layout';
+import ErrorModal from './../components/ErrorModal';
 
-class Main extends React.Component {
+export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: false,
+      errorMessage: null,
     }
 
     this.handleSearch = this.handleSearch.bind(this);
   }
 
+  componentDidMount() {
+    const { location } = queryString.parse(this.props.location.search);
+    location && this.handleSearch(location);
+  }
+
   handleSearch(location) {
     this.setState({ isLoading: true });
-
+    
     OpenWeatherMap.getTemp(location)
-      .then((temp) => {
-        this.setState({
+    .then((temp) => {
+      this.setState({
           location,
           temp,
           isLoading: false,
         });
+        window.history.pushState('string', '', `/?location=${location}`);
       })
       .catch((error) => {
-        console.log(error);
-        alert(error);
-        this.setState({ isLoading: false });
+        this.setState({ isLoading: false, errorMessage: error.message });
+        window.history.pushState('string', '', `/?location=${location}`);
       });
   }
 
   render() {
-    const { isLoading, temp, location } = this.state;
+    const { isLoading, temp, location, errorMessage } = this.state;
 
     function renderMessage() {
       if (isLoading) {
@@ -45,16 +53,15 @@ class Main extends React.Component {
 
     return (
       <div className="page home">
-        <header className="page-header">
-          <h1>Get Weather</h1>
-        </header>
-        <article className="page-body">
+        <Layout>
+          <header className="padding-vertical-2 text-center">
+            <h1>Get Weather</h1>
+          </header>
           <Form onSearch={this.handleSearch} />
           { renderMessage() }
-        </article>
+          { errorMessage && <ErrorModal message={errorMessage} />}
+        </Layout>
       </div>
     );
   };
 };
-
-export default Main;
