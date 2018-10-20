@@ -1,8 +1,9 @@
 import React from 'react';
+import OpenWeatherMap from 'OpenWeatherMap';
 import './../styles/home.css';
 import Form from './../components/Form';
 import FormMsg from './../components/FormMsg';
-import OpenWeatherMap from 'OpenWeatherMap';
+import Layout from './../components/Layout';
 
 class Main extends React.Component {
   constructor(props) {
@@ -45,13 +46,11 @@ class Main extends React.Component {
 
     return (
       <div className="page home">
-        <header className="page-header">
+        <Layout>
           <h1>Get Weather</h1>
-        </header>
-        <article className="page-body">
           <Form onSearch={this.handleSearch} />
           { renderMessage() }
-        </article>
+        </Layout>
       </div>
     );
   };

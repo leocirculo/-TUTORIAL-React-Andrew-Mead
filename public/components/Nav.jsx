@@ -16,7 +16,7 @@ export default class Nav extends React.Component {
               <NavLink to="/" exact activeStyle={{ fontWeight: 'bold' }}>Get Weather</NavLink>
             </li>
             <li>
-              <NavLink to="/about" exact activeStyle={{ fontWeight: 'bold' }}>About</NavLink>
+              <NavLink to="/examples" exact activeStyle={{ fontWeight: 'bold' }}>Examples</NavLink>
             </li>
             <li>
               <NavLink to="/topics" exact activeStyle={{ fontWeight: 'bold' }}>Topics</NavLink>
