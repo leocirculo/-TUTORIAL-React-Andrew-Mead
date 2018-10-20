@@ -4,16 +4,14 @@ import { NavLink } from "react-router-dom";
 export default class Nav extends React.Component {
   onSearch(e) {
     e.preventDefault();
-    const location = this.refs.search.value;
-    const encondedLocation = encodeURIComponent(location);
-    location && window.location.replace(`/?location=${encondedLocation}`);
+    alert('implement search');
   }
   render() {
     return (
       <div className="top-bar">
         <div className="top-bar-left">
           <ul className="dropdown menu" data-dropdown-menu>
-            <li className="menu-text">React Weather</li>
+            <li className="menu-text">Website</li>
             <li>
               <NavLink to="/" exact activeStyle={{ fontWeight: 'bold' }}>Get Weather</NavLink>
             </li>

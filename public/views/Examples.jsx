@@ -10,14 +10,6 @@ const Main = () => {
           <h1>Examples</h1>
           <p>Here are some examples to try out</p>
         </div>
-        <ol>
-          <li>
-            <Link to="/?location=Berlin">Berlin, Germany</Link>
-          </li>
-          <li>
-            <Link to="/?location=Resistencia">Resistencia, Chaco</Link>
-          </li>
-        </ol>
       </Layout>
     </div>
   );

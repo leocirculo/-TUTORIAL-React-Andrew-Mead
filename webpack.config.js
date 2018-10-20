@@ -22,12 +22,6 @@ module.exports = {
   },
   resolve: {
     modules: [__dirname, 'node_modules'],
-    alias: {
-      Greeter: 'public/components/Greeter.jsx',
-      GreeterMsg: 'public/components/GreeterMsg.jsx',
-      GreeterForm: 'public/components/GreeterForm.jsx',
-      OpenWeatherMap: 'public/api/openWeatherMap.jsx',
-    },
     extensions: ['.js', '.jsx'],
   },
   module: {
