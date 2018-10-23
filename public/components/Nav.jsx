@@ -11,26 +11,19 @@ export default class Nav extends React.Component {
       <div className="top-bar">
         <div className="top-bar-left">
           <ul className="dropdown menu" data-dropdown-menu>
-            <li className="menu-text">Website</li>
-            <li>
-              <NavLink to="/" exact activeStyle={{ fontWeight: 'bold' }}>Get Weather</NavLink>
+            <li className="menu-text">
+              <a href="/" style={{ padding: '0', color: 'white' }}>React Time App</a>
             </li>
             <li>
-              <NavLink to="/examples" exact activeStyle={{ fontWeight: 'bold' }}>Examples</NavLink>
+              <NavLink to="/timer" exact activeStyle={{ fontWeight: 'bold' }}>Timer</NavLink>
             </li>
-          </ul>
+            <li>
+              <NavLink to="/countdown" exact activeStyle={{ fontWeight: 'bold' }}>Countdown</NavLink>
+            </li>
+          </ul> 
         </div>
         <div className="top-bar-right">
-          <form onSubmit={this.onSearch.bind(this)}>
-            <ul className="menu">
-              <li>
-                <input type="search" placeholder="Search Weather" ref="search" />
-              </li>
-              <li>
-                <button type="submit" className="button">Get Weather</button>
-              </li>
-            </ul>
-          </form>
+          <strong>Created by <a href="#">Leo Gonzalez</a></strong>
         </div>
       </div>
     );
