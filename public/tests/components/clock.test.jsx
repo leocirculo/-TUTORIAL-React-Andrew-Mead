@@ -1,18 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import expect from 'expect';
-import Clock from 'Components/Clock';
+import Clock from './../../components/Clock';
 import TestUtils from 'react-dom/test-utils';
 
 describe('Clock', () => {
   describe('render', () => {
+    it('should exists', () => {
+      expect(Clock).toBeTruthy();
+    });
     it('should render clock to output', () => {
       const clock = TestUtils.renderIntoDocument(<Clock totalSeconds={62} />);
       const el = ReactDOM.findDOMNode(clock);
       const text = el.querySelector('.clock-text');
       expect(text.innerHTML).toBe('01:02');
     });
-  });
+  }); 
   describe('formatSeconds', () => {
     it('should format seconds', () => {
       const clock = TestUtils.renderIntoDocument(<Clock />);
