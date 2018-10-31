@@ -1,6 +1,19 @@
 {
   "presets": [
-    "env",
-    "react"
-  ]
+    "react",
+    "es2015",
+    "stage-0"
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        [
+          "babel-plugin-webpack-alias",
+          {
+            "config": "./webpack.config.test.js"
+          }
+        ]
+      ]
+    }
+  }
 }
