@@ -41,6 +41,7 @@ export default class Countdown extends React.Component {
     return (
       <Layout>
         <div className="countdown">
+          <h1 className="page-title">Countdown App</h1>
           <Clock totalSeconds={count}></Clock>
           {(countdownStatus !== 'stopped') && 
             <Controls 
