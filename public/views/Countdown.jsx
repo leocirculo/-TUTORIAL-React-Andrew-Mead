@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from 'Components/Layout';
 import Clock from 'Components/Clock';
 import CountdownFrom from 'Components/CountdownForm';
+import Controls from 'Components/Controls';
 
 
 export default class Countdown extends React.Component {
@@ -9,37 +10,55 @@ export default class Countdown extends React.Component {
     super(props);
     this.state = {
       count: 0,
-      countDownStatus: 'stopped',
+      countdownStatus: 'stopped',
     };
   };
   
   componentDidUpdate(prevProps, prevState) {
-    const { countDownStatus } = this.state;
-    if (countDownStatus !== prevState.countDownStatus) {
-      switch(countDownStatus) {
+    const { countdownStatus } = this.state;
+    if (countdownStatus !== prevState.countdownStatus) {
+      switch (countdownStatus) {
         case 'started':
           this.startTimer();
+          break;
+        case 'stopped':
+          this.setState({ count: 0 });
+        case 'paused': 
+          clearInterval(this.timer);
+          this.timer = undefined;
           break;
       }
     }
   };
 
   render() {
-    const { count } = this.state;
+    const { count, countdownStatus } = this.state;
     return (
       <Layout>
         <div className="countdown">
           <Clock totalSeconds={count}></Clock>
-          <CountdownFrom onSetCountdown={this.handleSetCountdown.bind(this)}></CountdownFrom>
+          {(countdownStatus !== 'stopped') && 
+            <Controls 
+              countdownStatus={countdownStatus}
+              onStatusChange={this.handleStatusChange.bind(this)}
+            ></Controls> }
+          {(countdownStatus === 'stopped') && 
+            <CountdownFrom onSetCountdown={this.handleSetCountdown.bind(this)}></CountdownFrom>}
         </div>
       </Layout>
     );
   };
 
+  handleStatusChange(newStatus) {
+    this.setState({
+      countdownStatus: newStatus,
+    });
+  };
+
   handleSetCountdown(seconds) {
     this.setState({
       count: seconds,
-      countDownStatus: 'started',
+      countdownStatus: 'started',
     });
   };
 
