@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 export default class Nav extends React.Component {
   onSearch(e) {
@@ -15,10 +15,7 @@ export default class Nav extends React.Component {
               <a href="/" style={{ padding: '0', color: 'white' }}>React Time App</a>
             </li>
             <li>
-              <NavLink to="/timer" exact activeStyle={{ fontWeight: 'bold' }}>Timer</NavLink>
-            </li>
-            <li>
-              <NavLink to="/countdown" exact activeStyle={{ fontWeight: 'bold' }}>Countdown</NavLink>
+              <NavLink to="/" exact activeStyle={{ fontWeight: 'bold' }}>Home</NavLink>
             </li>
           </ul> 
         </div>
