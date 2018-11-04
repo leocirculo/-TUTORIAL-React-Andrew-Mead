@@ -12,24 +12,25 @@ export default class Countdown extends React.Component {
       count: 0,
       countdownStatus: 'stopped',
     };
-  };
+  }
   
   componentDidUpdate(prevProps, prevState) {
     const { countdownStatus } = this.state;
     if (countdownStatus !== prevState.countdownStatus) {
       switch (countdownStatus) {
-        case 'started':
-          this.startTimer();
-          break;
-        case 'stopped':
-          this.setState({ count: 0 });
-        case 'paused': 
-          clearInterval(this.timer);
-          this.timer = undefined;
-          break;
+      case 'started':
+        this.startTimer();
+        break;
+      case 'stopped':
+        this.setState({ count: 0 });
+      // eslint-disable-next-line no-fallthrough
+      case 'paused': 
+        clearInterval(this.timer);
+        this.timer = undefined;
+        break;
       }
     }
-  };
+  }
 
   componentWillUnmount() {
     clearInterval(this.timer);
@@ -53,20 +54,20 @@ export default class Countdown extends React.Component {
         </div>
       </Layout>
     );
-  };
+  }
 
   handleStatusChange(newStatus) {
     this.setState({
       countdownStatus: newStatus,
     });
-  };
+  }
 
   handleSetCountdown(seconds) {
     this.setState({
       count: seconds,
       countdownStatus: 'started',
     });
-  };
+  }
 
   startTimer() {
     this.timer = setInterval(() => {
@@ -78,4 +79,4 @@ export default class Countdown extends React.Component {
       if (newCount === 0) this.setState({ countdownStatus: 'stopped'});
     }, 1000);
   }
-};
+}

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import Enzyme from 'enzyme';
 import { shallow } from 'enzyme';
@@ -7,7 +8,7 @@ import Countdown from 'Views/Countdown';
 Enzyme.configure({ adapter: new Adapter() });
 
 beforeEach(() => {
-  jest.spyOn(console, 'error')
+  jest.spyOn(console, 'error');
   console.error.mockImplementation(() => { });
   jest.useFakeTimers();
 })

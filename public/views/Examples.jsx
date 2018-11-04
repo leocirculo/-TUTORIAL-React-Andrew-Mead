@@ -1,6 +1,5 @@
 import React from 'react';
-import { NavLink as Link } from "react-router-dom";
-import Layout from './../components/Layout';
+import Layout from 'Components/Layout';
 
 const Main = () => {
   return (

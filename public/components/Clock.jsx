@@ -20,13 +20,13 @@ export default class Clock extends React.Component {
         <span className="clock-text">{ this.formatSeconds(totalSeconds) }</span>
       </div>
     );
-  };
-};
+  }
+}
 
 Clock.defaultProps = {
   totalSeconds: 0,
-}
+};
 
 Clock.propTypes = {
   totalSeconds: PropTypes.number,
-}
+};
