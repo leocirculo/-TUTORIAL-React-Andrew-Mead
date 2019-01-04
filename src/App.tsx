@@ -1,11 +1,32 @@
 import React, { Component } from 'react';
+import TodoList from './components/TodoList';
+import { Todo } from './interfaces';
 import './App.scss';
 
+interface State {
+  todos: Todo[];
+}
+
 export default class App extends Component {
-  render() {
+  public state: State = {
+    todos: [
+      {
+        id: 1,
+        text: 'walk the dog',
+      },
+      {
+        id: 2,
+        text: 'feed the dog',
+      },
+    ],
+  };
+
+  public render() {
+    const { todos } = this.state;
+
     return (
       <div className="App">
-        <h1>Todo App</h1>
+        <TodoList todos={todos} />
       </div>
     );
   }
