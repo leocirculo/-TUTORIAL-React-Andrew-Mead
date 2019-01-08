@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TodoList from './components/TodoList';
+import AddTodo from './components/AddTodo';
 import { Todo } from './interfaces';
 import './App.scss';
 
@@ -18,6 +19,10 @@ export default class App extends Component {
         id: 2,
         text: 'feed the dog',
       },
+      {
+        id: 3,
+        text: 'wash the dog',
+      },
     ],
   };
 
@@ -27,7 +32,14 @@ export default class App extends Component {
     return (
       <div className="App">
         <TodoList todos={todos} />
+        <AddTodo onSubmit={this.addTodo} />
       </div>
     );
   }
+
+  private addTodo = (text: string) => {
+    const { todos } = this.state;
+
+    this.setState({ todos: [...todos, { id: todos.length + 1, text }] });
+  };
 }

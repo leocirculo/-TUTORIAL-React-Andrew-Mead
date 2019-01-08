@@ -8,6 +8,10 @@ interface Props {
 export default class Todo extends React.Component<Props> {
   public render() {
     const { todo } = this.props;
-    return <li className="todo">{todo.text}</li>;
+    return (
+      <li className="todo">
+        {todo.id} - {todo.text}
+      </li>
+    );
   }
 }
