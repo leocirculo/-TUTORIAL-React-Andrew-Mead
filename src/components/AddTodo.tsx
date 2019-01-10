@@ -23,6 +23,7 @@ export default class AddTodo extends React.Component<Props, State> {
           value={this.state.text}
           onChange={this.handleOnChange}
           ref={this.inputRef}
+          placeholder="What do you need to do"
         />
         <button type="submit">Add Todo</button>
       </form>
