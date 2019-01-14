@@ -1,4 +1,4 @@
-import { Todo } from './../interfaces';
+import { Todo } from '../interfaces';
 
 export default {
   setTodos(todos: Todo[]) {
