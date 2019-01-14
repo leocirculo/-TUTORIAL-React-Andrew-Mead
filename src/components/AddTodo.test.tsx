@@ -16,7 +16,7 @@ describe('Todo List', () => {
     (input.instance() as any).value = 'test';
     input.simulate('change');
 
-    wrapper.find('form').simulate('submit'); 
+    wrapper.find('form').simulate('submit');
 
     expect(mockFn).toHaveBeenCalledWith('test');
   });
@@ -24,7 +24,7 @@ describe('Todo List', () => {
     const mockFn = jest.fn();
     const wrapper = mount(<AddTodo onSubmit={mockFn} />);
 
-    wrapper.find('form').simulate('submit'); 
+    wrapper.find('form').simulate('submit');
 
     expect(mockFn).not.toHaveBeenCalledWith('test');
   });

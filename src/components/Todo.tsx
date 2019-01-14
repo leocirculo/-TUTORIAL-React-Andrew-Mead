@@ -11,7 +11,7 @@ export default class Todo extends React.Component<Props> {
     const { todo } = this.props;
     return (
       <li className="todo" onClick={this.handleOnClick}>
-        <input type="checkbox" defaultChecked={todo.completed}/>
+        <input type="checkbox" defaultChecked={todo.completed} />
         <span>{todo.text}</span>
       </li>
     );
@@ -21,5 +21,5 @@ export default class Todo extends React.Component<Props> {
     if (this.props.onToggle) {
       this.props.onToggle(this.props.todo.id);
     }
-  }
+  };
 }

@@ -12,7 +12,12 @@ describe('Todo List', () => {
 
   it('should call onToggle prop with id on click', () => {
     const mockFn = jest.fn();
-    const wrapper = shallow(<Todo onToggle={mockFn} todo={{ id: '1', text: 'test', completed: false }} />);
+    const wrapper = shallow(
+      <Todo
+        onToggle={mockFn}
+        todo={{ id: '1', text: 'test', completed: false }}
+      />
+    );
 
     const li = wrapper.find('.todo');
     li.simulate('click');

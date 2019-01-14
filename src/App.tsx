@@ -7,8 +7,8 @@ import { Todo } from './interfaces';
 import './App.scss';
 
 interface State {
-  query: string,
-  showCompleted: boolean,
+  query: string;
+  showCompleted: boolean;
   todos: Todo[];
 }
 
@@ -40,7 +40,11 @@ export default class App extends Component {
 
     return (
       <div className="App">
-        <TodoSearch onSearch={this.handleOnSearch} query={query} showCompleted={showCompleted} />
+        <TodoSearch
+          onSearch={this.handleOnSearch}
+          query={query}
+          showCompleted={showCompleted}
+        />
         <TodoList todos={todos} onToggle={this.toggleCompleted} />
         <AddTodo onSubmit={this.addTodo} />
       </div>
@@ -55,15 +59,17 @@ export default class App extends Component {
       return todo;
     });
     this.setState({ todos: updatedTodos });
-  }
+  };
 
   private addTodo = (text: string) => {
     const { todos } = this.state;
 
-    this.setState({ todos: [...todos, { id: uuid(), text, completed: false }] });
+    this.setState({
+      todos: [...todos, { id: uuid(), text, completed: false }],
+    });
   };
 
   private handleOnSearch = (query: string, showCompleted: boolean) => {
     this.setState({ query, showCompleted });
-  }
+  };
 }
