@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v1';
+
 import TodoList from './components/TodoList';
 import AddTodo from './components/AddTodo';
 import TodoSearch from './components/TodoSearch';
 import { Todo } from './interfaces';
+import TodoAPI from './api/TodoApi';
+
 import './App.scss';
 
 interface State {
@@ -16,28 +19,15 @@ export default class App extends Component {
   public state: State = {
     query: '',
     showCompleted: false,
-    todos: [
-      {
-        id: uuid(),
-        text: 'walk the dog',
-        completed: false,
-      },
-      {
-        id: uuid(),
-        text: 'clean the yard',
-        completed: true,
-      },
-      {
-        id: uuid(),
-        text: 'watch tv',
-        completed: false,
-      },
-    ],
+    todos: TodoAPI.getTodos(),
   };
+
+  public componentDidUpdate() {
+    TodoAPI.setTodos(this.state.todos);
+  }
 
   public render() {
     const { todos, query, showCompleted } = this.state;
-
     return (
       <div className="App">
         <TodoSearch
