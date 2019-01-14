@@ -14,12 +14,14 @@ describe('Todo List', () => {
   it('should render one todo component for each todo item', () => {
     const todos = [
       {
-        id: 1,
+        id: '1',
         text: 'todo',
+        completed: false,
       },
       {
-        id: 2,
+        id: '2',
         text: 'todo',
+        completed: false,
       },
     ];
 

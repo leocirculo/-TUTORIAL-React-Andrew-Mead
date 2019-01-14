@@ -14,6 +14,7 @@ export default class TodoSearch extends React.Component<Props> {
       <div className="todo-search">
         <div className="todo-search__search-bar">
           <input 
+            className="search-bar__input"
             type="text" 
             placeholder="Search todos"
             value={query}
@@ -23,6 +24,7 @@ export default class TodoSearch extends React.Component<Props> {
         <div className="todo-search__show-completed">
           <label htmlFor="show-completed">
             <input 
+              className="show-completed__checkbox"
               type="checkbox"
               id="show-completed"
               checked={showCompleted}

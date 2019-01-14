@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uuid from 'uuid/v1';
 import TodoList from './components/TodoList';
 import AddTodo from './components/AddTodo';
 import TodoSearch from './components/TodoSearch';
@@ -17,16 +18,19 @@ export default class App extends Component {
     showCompleted: false,
     todos: [
       {
-        id: 1,
+        id: uuid(),
         text: 'walk the dog',
+        completed: false,
       },
       {
-        id: 2,
-        text: 'feed the dog',
+        id: uuid(),
+        text: 'clean the yard',
+        completed: true,
       },
       {
-        id: 3,
-        text: 'wash the dog',
+        id: uuid(),
+        text: 'watch tv',
+        completed: false,
       },
     ],
   };
@@ -37,16 +41,26 @@ export default class App extends Component {
     return (
       <div className="App">
         <TodoSearch onSearch={this.handleOnSearch} query={query} showCompleted={showCompleted} />
-        <TodoList todos={todos} />
+        <TodoList todos={todos} onToggle={this.toggleCompleted} />
         <AddTodo onSubmit={this.addTodo} />
       </div>
     );
   }
 
+  private toggleCompleted = (id: string) => {
+    const updatedTodos = this.state.todos.map((todo: Todo) => {
+      if (todo.id === id) {
+        todo.completed = !todo.completed;
+      }
+      return todo;
+    });
+    this.setState({ todos: updatedTodos });
+  }
+
   private addTodo = (text: string) => {
     const { todos } = this.state;
 
-    this.setState({ todos: [...todos, { id: todos.length + 1, text }] });
+    this.setState({ todos: [...todos, { id: uuid(), text, completed: false }] });
   };
 
   private handleOnSearch = (query: string, showCompleted: boolean) => {
