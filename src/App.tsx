@@ -28,6 +28,9 @@ export default class App extends Component {
 
   public render() {
     const { todos, query, showCompleted } = this.state;
+  
+    const filteredTodos = TodoAPI.filterTodos(todos, showCompleted, query);
+
     return (
       <div className="App">
         <TodoSearch
@@ -35,7 +38,7 @@ export default class App extends Component {
           query={query}
           showCompleted={showCompleted}
         />
-        <TodoList todos={todos} onToggle={this.toggleCompleted} />
+        <TodoList todos={filteredTodos} onToggle={this.toggleCompleted} />
         <AddTodo onSubmit={this.addTodo} />
       </div>
     );

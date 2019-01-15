@@ -53,4 +53,37 @@ describe('test todo api', () => {
       expect(TodoApi.getTodos()).toHaveLength(1);
     });
   });
+
+  describe('filterTodos', () => {
+    const todos = [
+      {
+        id: '1',
+        text: 'first test',
+        completed: true,
+      },
+      {
+        id: '2',
+        text: 'second test',
+        completed: false,
+      },
+      {
+        id: '3',
+        text: 'first test 2',
+        completed: true,
+      }
+    ];
+
+    it('should return all items if showCompleted is true', () => {
+      expect(TodoApi.filterTodos(todos, true, '')).toHaveLength(3);
+    });
+    it('should return only non-completed items if showCompleted is false', () => {
+      expect(TodoApi.filterTodos(todos, false, '')).toHaveLength(1);
+    });
+    it('should return items that include query', () => {
+      expect(TodoApi.filterTodos(todos, true, 'first')).toHaveLength(2);
+    });
+    it('should return no items if query is not included', () => {
+      expect(TodoApi.filterTodos(todos, true, 'asdasdasdasd')).toHaveLength(0);
+    });
+  });
 });

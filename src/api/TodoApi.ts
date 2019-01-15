@@ -44,4 +44,24 @@ export default {
     }
     return [];
   },
+  filterTodos(todos: Todo[], showCompleted: boolean, query: string) {
+    let filteredTodos = [...todos];
+
+    // Filter by showCompleted && query
+    filteredTodos = filteredTodos.filter((todo) => {
+      const cond1 = !todo.completed || showCompleted;
+      const cond2 = todo.text.toLowerCase().includes(query.toLowerCase());
+      return cond1 && cond2;
+    })
+    // Sort todos with non completed first
+    return filteredTodos.sort((a, b) => {
+      if (a.completed && !b.completed) {
+        return 1;
+      }
+      if (!a.completed && b.completed) {
+        return -1;
+      }
+      return 0;
+    });
+  },
 };
