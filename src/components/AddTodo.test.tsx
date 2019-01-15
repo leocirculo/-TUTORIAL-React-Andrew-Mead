@@ -5,7 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('Todo List', () => {
+describe('Add Todo', () => {
   it('should exist', () => {
     expect(AddTodo).toBeTruthy();
   });
