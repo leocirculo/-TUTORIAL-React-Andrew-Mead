@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import 'foundation-sites/dist/css/foundation.css';
+import moment from 'moment';
 import uuid from 'uuid/v1';
 
 import TodoList from './components/TodoList';
@@ -6,6 +8,7 @@ import AddTodo from './components/AddTodo';
 import TodoSearch from './components/TodoSearch';
 import { Todo } from './interfaces';
 import TodoAPI from './api/TodoApi';
+import './store';
 
 import './App.scss';
 
@@ -28,18 +31,32 @@ export default class App extends Component {
 
   public render() {
     const { todos, query, showCompleted } = this.state;
-  
+
     const filteredTodos = TodoAPI.filterTodos(todos, showCompleted, query);
 
     return (
-      <div className="App">
-        <TodoSearch
-          onSearch={this.handleOnSearch}
-          query={query}
-          showCompleted={showCompleted}
-        />
-        <TodoList todos={filteredTodos} onToggle={this.toggleCompleted} />
-        <AddTodo onSubmit={this.addTodo} />
+      <div className="todo-app">
+        <header className="todo-app__header">
+          <h1>Todo App</h1>
+        </header>
+        <div className="todo-app__body">
+          <div className="grid-x">
+            <div className="cell medium-6 large-8 medium-offset-3 large-offset-2">
+              <div className="container">
+                <TodoSearch
+                  onSearch={this.handleOnSearch}
+                  query={query}
+                  showCompleted={showCompleted}
+                />
+                <TodoList
+                  todos={filteredTodos}
+                  onToggle={this.toggleCompleted}
+                />
+                <AddTodo onSubmit={this.addTodo} />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -48,6 +65,7 @@ export default class App extends Component {
     const updatedTodos = this.state.todos.map((todo: Todo) => {
       if (todo.id === id) {
         todo.completed = !todo.completed;
+        todo.completedAt = todo.completed ? moment().unix() : undefined;
       }
       return todo;
     });
@@ -58,7 +76,10 @@ export default class App extends Component {
     const { todos } = this.state;
 
     this.setState({
-      todos: [...todos, { id: uuid(), text, completed: false }],
+      todos: [
+        ...todos,
+        { id: uuid(), text, completed: false, createdAt: moment().unix() },
+      ],
     });
   };
 

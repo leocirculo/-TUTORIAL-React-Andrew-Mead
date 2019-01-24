@@ -2,6 +2,7 @@ import Todo from './Todo';
 import Enzyme, { shallow } from 'enzyme';
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
+import moment from 'moment';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -15,7 +16,12 @@ describe('Todo', () => {
     const wrapper = shallow(
       <Todo
         onToggle={mockFn}
-        todo={{ id: '1', text: 'test', completed: false }}
+        todo={{
+          id: '1',
+          text: 'test',
+          completed: false,
+          createdAt: moment().unix(),
+        }}
       />
     );
 

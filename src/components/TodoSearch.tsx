@@ -10,7 +10,7 @@ export default class TodoSearch extends React.Component<Props> {
   public render() {
     const { query, showCompleted } = this.props;
     return (
-      <div className="todo-search">
+      <header className="container__header todo-search">
         <div className="todo-search__search-bar">
           <input
             className="search-bar__input"
@@ -36,7 +36,7 @@ export default class TodoSearch extends React.Component<Props> {
             Show completed Todos
           </label>
         </div>
-      </div>
+      </header>
     );
   }
 

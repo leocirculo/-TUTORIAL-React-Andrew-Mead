@@ -12,11 +12,18 @@ export default class TodoList extends React.Component<Props> {
     const { todos, onToggle } = this.props;
 
     return (
-      <ul className="todo-list">
-        {todos.map(item => {
-          return <Todo todo={item} key={item.id} onToggle={onToggle} />;
-        })}
-      </ul>
+      <div className="container__body">
+        {todos.length === 0 && (
+          <p className="todo-list--empty">Nothing to do</p>
+        )}
+        {todos.length > 0 && (
+          <ul className="todo-list">
+            {todos.map(item => {
+              return <Todo todo={item} key={item.id} onToggle={onToggle} />;
+            })}
+          </ul>
+        )}
+      </div>
     );
   }
 }

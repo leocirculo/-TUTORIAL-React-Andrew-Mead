@@ -48,11 +48,11 @@ export default {
     let filteredTodos = [...todos];
 
     // Filter by showCompleted && query
-    filteredTodos = filteredTodos.filter((todo) => {
+    filteredTodos = filteredTodos.filter(todo => {
       const cond1 = !todo.completed || showCompleted;
       const cond2 = todo.text.toLowerCase().includes(query.toLowerCase());
       return cond1 && cond2;
-    })
+    });
     // Sort todos with non completed first
     return filteredTodos.sort((a, b) => {
       if (a.completed && !b.completed) {

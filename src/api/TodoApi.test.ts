@@ -1,4 +1,5 @@
 import TodoApi from './TodoApi';
+import moment from 'moment';
 
 describe('test todo api', () => {
   beforeEach(() => {
@@ -16,6 +17,7 @@ describe('test todo api', () => {
           id: '1',
           text: 'test',
           completed: false,
+          createdAt: moment().unix(),
         },
       ];
       TodoApi.setTodos(todos);
@@ -60,17 +62,20 @@ describe('test todo api', () => {
         id: '1',
         text: 'first test',
         completed: true,
+        createdAt: moment().unix(),
       },
       {
         id: '2',
         text: 'second test',
         completed: false,
+        createdAt: moment().unix(),
       },
       {
         id: '3',
         text: 'first test 2',
         completed: true,
-      }
+        createdAt: moment().unix(),
+      },
     ];
 
     it('should return all items if showCompleted is true', () => {
