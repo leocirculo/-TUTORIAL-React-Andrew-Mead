@@ -1,22 +1,44 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
-const stateDefault = {
-  searchText: '',
-  showCompleted: false,
-  todos: [],
-};
+type Todo = {
+  id: number;
+  text: string;
+}
 
-const reducer = (state = stateDefault, action: any) => {
+const searchReducer = (state = '', action: any) => {
   switch (action.type) {
     case 'CHANGE_SEARCH_TEXT':
-      return {
-        ...state,
-        searchText: action.searchText,
-      };
+      return action.text;
+    default: 
+      return state;
+  }
+}
+
+const todosReducer = (state: Todo[] = [], action: any) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return [...state, action.todo] as any;
+    case 'REMOVE_TODO':
+      return state.filter((item: Todo) => item.id !== action.id);
     default:
       return state;
   }
-};
+}
+
+const showCompleted = (state = false, action: any) => {
+  switch (action.type) {
+    case 'TOGGLE_SHOW_COMPLETED':
+      return !state;
+    default:
+      return state;
+  }
+}
+
+const reducer = combineReducers({
+  search: searchReducer,
+  todos: todosReducer,
+  showCompleted: showCompleted,
+});
 
 const store = createStore(
   reducer,
@@ -31,5 +53,27 @@ store.subscribe(() => {
 
 store.dispatch({
   type: 'CHANGE_SEARCH_TEXT',
-  searchText: 'Leo',
+  text: 'search something',
+});
+
+store.dispatch({
+  type: 'ADD_TODO',
+  todo: {
+    id: 1,
+    text: 'Add a new todo',
+  },
+});
+store.dispatch({
+  type: 'ADD_TODO',
+  todo: {
+    id: 2,
+    text: 'Another new todo',
+  },
+});
+store.dispatch({
+  type: 'REMOVE_TODO',
+  id: 1,
+});
+store.dispatch({
+  type: 'TOGGLE_SHOW_COMPLETED',
 });
