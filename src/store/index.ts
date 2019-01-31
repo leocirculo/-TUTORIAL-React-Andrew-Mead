@@ -64,10 +64,51 @@ const showCompleted = (state = false, action: any) => {
   }
 }
 
+const startLocationFetch = () => {
+  return {
+    type: 'START_LOCATION_FETCH',
+  }
+}
+const completeLocationFetch = (url: string) => {
+  return {
+    type: 'COMPLETE_LOCATION_FETCH',
+    url,
+  }
+}
+const fetchLocation = async () => {
+  store.dispatch(startLocationFetch());
+
+  let resp = await fetch('https://api.ipify.org?format=json')
+  let respJson = await resp.json();
+  resp = await fetch(`http://api.ipstack.com/${respJson.ip}?access_key=cd3b83c2fe5fc1d2313b972dd0c2ba5e&format=1`);
+  respJson = await resp.json();
+  const gMapUrl = `http://maps.google.com/?q=${respJson.latitude},${respJson.longitude}`;
+  
+  store.dispatch(completeLocationFetch(gMapUrl));
+}
+
+const mapReducer = (state = { isFetching: false, url: undefined }, action: any) => {
+  switch(action.type) {
+    case 'START_LOCATION_FETCH':
+      return {
+        isFetching: true,
+        url: undefined,
+      }
+    case 'COMPLETE_LOCATION_FETCH':
+      return {
+        isFetching: false,
+        url: action.url,
+      }
+    default: 
+      return state;
+  }
+}
+
 const reducer = combineReducers({
   search: searchReducer,
   todos: todosReducer,
   showCompleted: showCompleted,
+  map: mapReducer,
 });
 
 const store = createStore(
@@ -79,15 +120,9 @@ const store = createStore(
 // Suscribe to changes
 store.subscribe(() => {
   const state = store.getState();
+  if (state.map.isFetching) {
+    console.log('Loading...');
+  }
 });
 
-store.dispatch(changeName('search something'));
-
-store.dispatch(addTodo('Add a new todo'));
-store.dispatch(addTodo('Add another todo'));
-
-store.dispatch(removeTodo(store.getState().todos[0].id));
-
-store.dispatch(toggleShowCompleted());
-store.dispatch(toggleShowCompleted());
-store.dispatch(toggleShowCompleted());
+fetchLocation();
