@@ -15,7 +15,7 @@ describe('Todo', () => {
     const mockFn = jest.fn();
     const wrapper = shallow(
       <Todo
-        onToggle={mockFn}
+        onToggleCompleted={mockFn}
         todo={{
           id: '1',
           text: 'test',

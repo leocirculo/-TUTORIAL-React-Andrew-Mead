@@ -1,35 +1,45 @@
 
-import uuid from 'uuid';
-import { store } from './../index';
-
-export const changeName = (text: string) => {
+import { store } from '../index';
+import { Todo } from './../../interfaces';
+// SEARCH
+export const setSearchText = (text: string) => {
   return {
-    type: 'CHANGE_SEARCH_TEXT',
+    type: 'SET_SEARCH_TEXT',
     text,
   }
 }
+// CURD TODO
 export const addTodo = (text: string) => {
   return {
     type: 'ADD_TODO',
-    todo: {
-      id: uuid(),
-      text,
-    },
+    text,
+  }
+}
+export const addTodos = (todos: Todo[]) => {
+  return {
+    type: 'ADD_TODOS',
+    todos,
   }
 }
 export const removeTodo = (id: string) => {
   return {
     type: 'REMOVE_TODO',
-    id,
+    text: id,
   }
 }
-
+export const toggleTodo = (id: string) => {
+  return {
+    type: 'TOGGLE_TODO',
+    text: id,
+  }
+}
+// TOGGLE COMPLETED
 export const toggleShowCompleted = () => {
   return {
     type: 'TOGGLE_SHOW_COMPLETED',
   }
 }
-
+// EXTRA
 export const startLocationFetch = () => {
   return {
     type: 'START_LOCATION_FETCH',

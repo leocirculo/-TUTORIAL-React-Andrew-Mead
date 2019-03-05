@@ -4,7 +4,7 @@ import { Todo as TodoType } from './../interfaces';
 
 interface Props {
   todo: TodoType;
-  onToggle?: (id: string) => void;
+  onToggleCompleted?: (id: string) => void;
 }
 
 export default class Todo extends React.Component<Props> {
@@ -18,7 +18,7 @@ export default class Todo extends React.Component<Props> {
         <input
           type="checkbox"
           checked={todo.completed}
-          onChange={this.handleOnClick}
+          onChange={() => {}}
         />
         <div className="todo-text">
           <span>{todo.text} - </span>
@@ -37,8 +37,9 @@ export default class Todo extends React.Component<Props> {
   }
 
   private handleOnClick = () => {
-    if (this.props.onToggle) {
-      this.props.onToggle(this.props.todo.id);
+    const { onToggleCompleted } = this.props;
+    if (onToggleCompleted) {
+      onToggleCompleted(this.props.todo.id);
     }
   };
 }

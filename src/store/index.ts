@@ -1,6 +1,13 @@
 import { createStore, combineReducers } from 'redux';
-import { searchReducer, todosReducer, showCompleted, mapReducer } from './reducers';
-import { fetchLocation } from './actions';
+import { searchReducer, todosReducer, showCompleted, mapReducer } from './reducers/reducers';
+import { Todo } from './../interfaces';
+
+export interface State {
+  search: string;
+  todos: Todo[];
+  showCompleted: boolean;
+  map?: string;
+}
 
 const reducer = combineReducers({
   search: searchReducer,
@@ -14,15 +21,3 @@ export const store = createStore(
   (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
     (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 );
-
-// Suscribe to changes
-store.subscribe(() => {
-  const state = store.getState();
-  if (state.map.isFetching) {
-    console.log('Loading...');
-  } else {
-    console.log(state.map.url);
-  }
-});
-
-fetchLocation();

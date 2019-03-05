@@ -1,4 +1,4 @@
-import TodoList from './TodoList';
+import ConnectedTodoList, { TodoList } from './TodoList';
 import Todo from './Todo';
 import { Todo as TodoType } from './../interfaces';
 import Enzyme, { shallow } from 'enzyme';
@@ -29,7 +29,7 @@ describe('Todo List', () => {
       },
     ];
 
-    const wrapper = shallow(<TodoList todos={todos} />);
+    const wrapper = shallow(<TodoList todos={todos} showCompleted={true} search="" />);
 
     expect(wrapper.find(Todo)).toHaveLength(2);
   });
@@ -37,7 +37,7 @@ describe('Todo List', () => {
   it('should render a message when theres no todos', () => {
     const todos: TodoType[] = [];
 
-    const wrapper = shallow(<TodoList todos={todos} />);
+    const wrapper = shallow(<TodoList todos={todos} showCompleted={true} search="" />);
 
     const message = wrapper.find('p');
 
