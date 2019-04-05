@@ -5,17 +5,10 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { store } from './store';
-import { addTodos } from './store/actions/actions';
+import { startAddTodos } from './store/actions/actions';
 import TodoApi from './api/TodoApi';
 
-store.subscribe(() => {
-  const state = store.getState();
-  TodoApi.setTodos(state.todos);
-});
-
-const initialTodos = TodoApi.getTodos();
-
-store.dispatch(addTodos(initialTodos));
+store.dispatch(startAddTodos());
 
 ReactDOM.render(
   <Provider store={store}>

@@ -13,6 +13,9 @@ type TextAction = {
   type: string;
   text?: string;
   todos?: Todo[];
+  todo?: Todo;
+  updates?: any;
+  id?: string;
 }
 
 export const searchReducer = (state = '', action: TextAction) => {  
@@ -27,19 +30,19 @@ export const searchReducer = (state = '', action: TextAction) => {
 export const todosReducer = (state: Todo[] = [], action: TextAction) => {
   switch (action.type) {
     case 'ADD_TODO':
-      return [...state, {
-        id: uuid(),
-        text: action.text,
-        completed: false,
-        createdAt: moment().unix(),
-      }] as any;
+      return [
+        ...state, 
+        action.todo,
+      ] as any;
     case 'ADD_TODOS':
       return [...state, ...action.todos ? action.todos : []];
-    case 'TOGGLE_TODO':
+    case 'UPDATE_TODO':
       return state.map((todo) => {
-        if (todo.id === action.text) {
-          todo.completed = !todo.completed;
-          todo.completedAt = todo.completed ? moment().unix() : undefined;
+        if (todo.id === action.id) {
+          return {
+            ...todo,
+            ...action.updates,
+          }
         }
         return todo;
       })

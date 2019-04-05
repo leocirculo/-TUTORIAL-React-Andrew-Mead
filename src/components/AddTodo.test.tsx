@@ -12,7 +12,7 @@ describe('Add Todo', () => {
   it('should dispatch ADD_TODO when valid valid todo text', () => {
     const mockFn = jest.fn(); 
 
-    const wrapper = mount(<AddTodo addTodo={mockFn} />);
+    const wrapper = mount(<AddTodo startAddTodo={mockFn} />);
     const input = wrapper.find('input');
     (input.instance() as any).value = 'test';
     input.simulate('change');
@@ -23,7 +23,7 @@ describe('Add Todo', () => {
   });
   it('should not call on Submit if there is no text', () => {
     const mockFn = jest.fn();
-    const wrapper = mount(<AddTodo addTodo={mockFn} />);
+    const wrapper = mount(<AddTodo startAddTodo={mockFn} />);
 
     wrapper.find('form').simulate('submit');
 

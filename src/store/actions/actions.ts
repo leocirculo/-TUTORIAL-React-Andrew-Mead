@@ -1,6 +1,9 @@
 
+import moment from 'moment';
 import { store } from '../index';
 import { Todo } from './../../interfaces';
+import { firebaseRef } from './../../firebase';
+
 // SEARCH
 export const setSearchText = (text: string) => {
   return {
@@ -9,28 +12,80 @@ export const setSearchText = (text: string) => {
   }
 }
 // CURD TODO
-export const addTodo = (text: string) => {
+export const addTodo = (todo: Todo) => {
   return {
     type: 'ADD_TODO',
-    text,
+    todo,
   }
 }
+
+export const startAddTodo = (text: string) => {
+  return (dispatch: any) => {
+    const todo = {
+      text,
+      completed: false,
+      createdAt: moment().unix(),
+    }
+    const todoRef = firebaseRef.child('todos').push(todo);
+
+    return todoRef.then(() => {
+      dispatch(addTodo({
+        ...todo,
+        id: todoRef.key!,
+      }))
+    });
+  }
+}
+
 export const addTodos = (todos: Todo[]) => {
   return {
     type: 'ADD_TODOS',
     todos,
   }
 }
+
+export const startAddTodos = () => {
+  return (dispatch: any) => {
+    const todosRef = firebaseRef.child(`todos`);
+    return todosRef.once('value', (snapshot) => {
+      const todos: Todo[] = [];
+      if (snapshot) {
+        const todosRef = snapshot.val() || {};
+        Object.keys(todosRef).forEach((id: string) => {
+          todos.push({ id, ...todosRef[id] });
+        });
+      }
+      dispatch(addTodos(todos));
+    });
+    
+  }
+}
+
 export const removeTodo = (id: string) => {
   return {
     type: 'REMOVE_TODO',
     text: id,
   }
 }
-export const toggleTodo = (id: string) => {
+
+export const startToggleTodo = (id: string, completed: boolean) => {
+  return (dispatch: any) => {
+    const todoRef = firebaseRef.child(`todos/${id}`);
+    const updates = {
+      completed,
+      completedAt: completed ? moment().unix() : null,
+    };
+    return todoRef.update(updates).then(() => {
+      dispatch(updateTodo(id, updates));
+    });
+  }
+}
+
+export const updateTodo = (id: string, updates: any) => {  
   return {
-    type: 'TOGGLE_TODO',
-    text: id,
+    type: 'UPDATE_TODO',
+    id,
+    updates,
   }
 }
 // TOGGLE COMPLETED

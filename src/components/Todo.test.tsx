@@ -28,6 +28,6 @@ describe('Todo', () => {
     const li = wrapper.find('.todo');
     li.simulate('click');
 
-    expect(mockFn).toHaveBeenCalledWith('1');
+    expect(mockFn).toHaveBeenCalledWith('1', true);
   });
 });

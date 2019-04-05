@@ -4,7 +4,7 @@ import { Todo as TodoType } from './../interfaces';
 
 interface Props {
   todo: TodoType;
-  onToggleCompleted?: (id: string) => void;
+  onToggleCompleted?: (id: string, completed: boolean) => void;
 }
 
 export default class Todo extends React.Component<Props> {
@@ -39,7 +39,7 @@ export default class Todo extends React.Component<Props> {
   private handleOnClick = () => {
     const { onToggleCompleted } = this.props;
     if (onToggleCompleted) {
-      onToggleCompleted(this.props.todo.id);
+      onToggleCompleted(this.props.todo.id, !this.props.todo.completed);
     }
   };
 }

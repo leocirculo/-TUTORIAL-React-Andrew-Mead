@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addTodo } from './../store/actions/actions';
+import { startAddTodo } from './../store/actions/actions';
 
 interface State {
   text: string;
 }
 
 interface Props {
-  addTodo?: (text: string) => void;
+  startAddTodo?: (text: string) => void;
 }
 
 export class AddTodo extends React.Component<Props, State> {
@@ -38,10 +38,10 @@ export class AddTodo extends React.Component<Props, State> {
 
   public handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { addTodo } = this.props;
-    if (addTodo) {
+    const { startAddTodo } = this.props;
+    if (startAddTodo) {
       if (this.state.text) {
-        addTodo(this.state.text);
+        startAddTodo(this.state.text);
         this.setState({ text: '' });
       } else if (this.inputRef.current) {
         this.inputRef.current.focus();
@@ -55,7 +55,7 @@ export class AddTodo extends React.Component<Props, State> {
 }
 
 const mapDispatchToProps = {
-  addTodo,
+  startAddTodo,
 };
 
 export default connect(null, mapDispatchToProps)(AddTodo);

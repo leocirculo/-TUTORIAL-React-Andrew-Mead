@@ -16,12 +16,17 @@ describe('Reducers', () => {
     it('should add a todo', () => {
       const action = {
         type: 'ADD_TODO',
-        text: 'walk the dog',
+        todo: {
+          id: '123',
+          text: 'Something',
+          completed: false,
+          createdAt: 123,
+        },
       }
   
       const res = todosReducer([], action);
       expect(res).toHaveLength(1);
-      expect(res[0].text).toEqual('walk the dog');
+      expect(res[0]).toEqual(action.todo);
       
       const res2 = todosReducer(res, action);
       expect(res2).toHaveLength(2);
@@ -52,23 +57,26 @@ describe('Reducers', () => {
       const res = todosReducer([{ id: '123', text: 'todo' }], action);
       expect(res).toHaveLength(0);
     })
-    it('should toggle completed on a todo', () => {
+    it('should update todo', () => {
       const todos = [{
         id: '1',
         text: 'walk the dog',
       }]
-      const action = {
-        type: 'TOGGLE_TODO',
-        text: '1',
+      const updates = {
+        completed: false,
+        completedAt: null,
       };
 
-      const res = todosReducer(todos, action);
-      expect(res[0].completed).toBeTruthy();
-      expect(res[0].completedAt).toBeTruthy();
-      
-      const res2 = todosReducer(res, action);
-      expect(res[0].completed).not.toBeTruthy();
-      expect(res[0].completedAt).not.toBeTruthy();
+      const action = {
+        type: 'UPDATE_TODO',
+        id: todos[0].id,
+        updates,
+      };
+
+      const res = todosReducer(todos, action);      
+      expect(res[0].completed).toEqual(updates.completed);
+      expect(res[0].completedAt).toEqual(updates.completedAt);
+      expect(res[0].text).toEqual(todos[0].text);
     });
   });
   describe('showCompleted', () => {

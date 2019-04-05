@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import Todo from './Todo';
 import { Todo as TodoType } from './../interfaces';
 import { State as StoreState } from './../store/index';
-import { toggleTodo } from './../store/actions/actions';
+import { startToggleTodo } from './../store/actions/actions';
 import TodoAPI from './../api/TodoApi';
 
 interface Props {
   todos: TodoType[];
   showCompleted: boolean;
   search: string;
-  toggleTodo?: (id: string) => void;
+  startToggleTodo?: (id: string, completed: boolean) => void;
 }
 
 export class TodoList extends React.Component<Props> {
@@ -36,10 +36,10 @@ export class TodoList extends React.Component<Props> {
     return TodoAPI.filterTodos(todos, showCompleted, search);
   }
 
-  private handleOnToggleCompleted = (id: string) => {
-    const { toggleTodo } = this.props;
-    if (toggleTodo) {
-      toggleTodo(id);
+  private handleOnToggleCompleted = (id: string, completed: boolean) => {
+    const { startToggleTodo } = this.props;
+    if (startToggleTodo) {
+      startToggleTodo(id, completed);
     }
   }
 }
@@ -53,7 +53,7 @@ const mapStateToProps = (state: StoreState) => {
 }
 
 const mapDispatchToProps = {
-  toggleTodo,
+  startToggleTodo,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

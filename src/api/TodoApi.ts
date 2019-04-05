@@ -12,38 +12,6 @@ function checkTodoType(todo: Todo) {
 }
 
 export default {
-  setTodos(todos: Todo[]) {
-    try {
-      todos.forEach((todo: any) => {
-        if (!checkTodoType(todo)) {
-          throw new Error(`todo item is invalid: ${JSON.stringify(todo)}`);
-        }
-      });
-      localStorage.setItem('todos', JSON.stringify(todos));
-    } catch (error) {
-      return error;
-    }
-  },
-  getTodos() {
-    const stringTodos = localStorage.getItem('todos');
-
-    try {
-      if (stringTodos) {
-        const todos = JSON.parse(stringTodos);
-
-        todos.forEach((todo: any) => {
-          if (!checkTodoType(todo)) {
-            throw new Error(`todo item is invalid: ${JSON.stringify(todo)}`);
-          }
-        });
-
-        return todos;
-      }
-    } catch (error) {
-      return error;
-    }
-    return [];
-  },
   filterTodos(todos: Todo[], showCompleted: boolean, query: string) {
     let filteredTodos = [...todos];
 
